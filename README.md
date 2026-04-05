@@ -56,8 +56,6 @@ preview_context.open_stage_with_callback(temp.usda)
 frame_viewport_prims(viewport_api, ["/Preview"])
 ```
 
----
-
 ## Technical Details
 
 | Technology | Purpose |
@@ -69,14 +67,6 @@ frame_viewport_prims(viewport_api, ["/Preview"])
 | `UsdContext.open_stage_with_callback` | Loads the temporary Stage through Kit's full loading pipeline, ensuring all viewport subsystems initialize correctly |
 | `stage_event_stream` + `StageEventType.SELECTION_CHANGED` | Listens for selection change events |
 | `omni.kit.viewport.utility.frame_viewport_prims` | Frames the camera to fit the specified Prim |
-
-### Why `open_stage_with_callback` Instead of `attach_stage_with_callback`
-
-Passing a Python `Usd.Stage` object directly to `attach_stage_with_callback` bypasses Kit's internal stage registry. As a result, viewport subsystems such as raycast and the renderer cannot resolve a valid stage ID, causing `Invalid UsdStage` errors and a black screen.
-
-`open_stage_with_callback` runs the full stage loading pipeline and correctly registers the stage ID with all subsystems. This is the reliable approach used by this extension.
-
----
 
 ## Usage
 
@@ -93,7 +83,8 @@ Passing a Python `Usd.Stage` object directly to `attach_stage_with_callback` byp
 3. The **PrimLens** viewport will automatically show an isolated 3D preview of that Prim
 4. Use the mouse to orbit and zoom within the viewport
 
-![PrimLens Demo](demo.png)
+Demo
+<img width="1917" height="1045" alt="demo" src="https://github.com/user-attachments/assets/58aa10bd-f6fa-4cba-a17e-f7dbf331cfdd" />
 
 ---
 
